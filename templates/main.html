@@ -33,12 +33,9 @@
     <div class="col-sm-4">
       <h2>First Photo</h2>
       <div class="container" >
-        <input type="file" accept="image/*" onchange="loadFile1(event)">
-              
+        <input type="file" accept="image/*" value="" id="image1" onchange="loadFile1(event)">
               <p><img id="output1" width="350"/></p>
-              
-        
-        </div>
+      </div>
         
       <div class="row">
         <div class="col-sm-5">
@@ -46,7 +43,7 @@
           <div class="col-sm-5">
           <button id = "phase1"> Phase</button></div>
         </div>
-      <div> <img class="img-responsive" src="" id= "output1"></div>
+        
     </div>
     <div class="col-sm-4">
       <h2>Second Photo</h2>
@@ -59,14 +56,13 @@
                       image.src=URL.createObjectURL(event.target.files[0]);
                   };
               </script>
-        </div>
+      </div>
       <div class="row">
         <div class="col-sm-5">
           <button id = "mag2"> Magnitude</button></div>
           <div class="col-sm-5">
           <button id = "phase2"> Phase</button></div>
-        </div>
-      <div> <img class="img-responsive" src="" id= "output2"></div>
+      </div>
     </div>
     <div class="col-sm-4">
         <h2>Result</h2>
@@ -78,10 +74,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-  //       let loadFile1 = function(event) {
-  //     let image = document.getElementById('output1');
-  //     image.src=URL.createObjectURL(event.target.files[0]);
-  // };
+  let image = document.getElementById('output1');
+  var loadFile1 = function(event) {
+      image.src=URL.createObjectURL(event.target.files[0]);
+  };
   let width = 500;
   let height = 500;
 
@@ -96,13 +92,14 @@
   let layer2 = new Konva.Layer();
 
   // stage.container().style.backgroundImage = '..//static//assets//OIP.jpg';
-  let imageObj = new Image();
+  //let imageObj = new Image();
+  
 
-  imageObj.onload = function () {
+  image.onload = function () {
       let yoda = new Konva.Image({
           x: 0,
           y: 0,
-          image: imageObj,
+          image: image,
           width: stage.width(),
           height: stage.height(),
       });
@@ -110,7 +107,6 @@
       // add the shape to the layer
       layer.add(yoda);
   };
-  imageObj.src = '../static/assets/OIP.jpg';
 
   let rect = new Konva.Rect({
       x: 0,
