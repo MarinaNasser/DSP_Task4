@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/node_modules/cropperjs/dist/cropper.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
@@ -19,26 +20,49 @@
 <div class="jumbotron text-center" style="margin-bottom:1">
   <h2>WEBSITE NAME</h2>
 </div>
-<div class="container">
-<input type="file" accept="image/*" onchange="loadFile(event)">
-      <p><img id="output" width="200"/></p>
-      <script>
-          var loadFile = function(event) {
-              var image = document.getElementById('output');
-              image.src=URL.createObjectURL(event.target.files[0]);
-          };
-      </script>
-</div>
+
 
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h2>First Photo</h2>
-      <div> <img class="img-responsive" src="..\static\assets\635842111225936353-santa.webp" alt="Chania"></div>
+      <div class="container">
+        <input type="file" accept="image/*" onchange="loadFile1(event)">
+              <p><img id="output1" width="350"/></p>
+              <script>
+                  var loadFile1 = function(event) {
+                      var image = document.getElementById('output1');
+                      image.src=URL.createObjectURL(event.target.files[0]);
+                  };
+              </script>
+        </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <button id = "cropImageBtn1">Crop Magnitude</button></div>
+          <div class="col-sm-5">
+          <button id = "cropImageBtn1">Crop Phase</button></div>
+        </div>
+      <div> <img class="img-responsive" src="" id= "output1"></div>
     </div>
     <div class="col-sm-4">
       <h2>Second Photo</h2>
-      <div><img class="img-responsive" src="..\static\assets\OIP.jpg" alt="Chania"></div>
+      <div class="container">
+        <input type="file" accept="image/*" onchange="loadFile(event)">
+              <p><img id="output2" width="350"/></p>
+              <script>
+                  var loadFile = function(event) {
+                      var image = document.getElementById('output2');
+                      image.src=URL.createObjectURL(event.target.files[0]);
+                  };
+              </script>
+        </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <button id = "cropImageBtn1">Crop Magnitude</button></div>
+          <div class="col-sm-5">
+          <button id = "cropImageBtn1">Crop Phase</button></div>
+        </div>
+      <div> <img class="img-responsive" src="" id= "output2"></div>
     </div>
     <div class="col-sm-4">
         <h2>Result</h2>
@@ -48,7 +72,8 @@
   </div>
 </div>
 
-
+<script src="/static/node_modules/cropperjs/dist/cropper.min.js"></script>
+<script src = "/static/js/index.js"></script>
 </body>
 </html>
 
