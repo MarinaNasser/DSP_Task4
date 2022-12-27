@@ -79,15 +79,15 @@
 
   let stage2 = new Konva.Stage({
       container: 'container2',
-      width: width,
-      height: height,
+      width: width2,
+      height: height2,
   });
 
   let layer3 = new Konva.Layer();
 
   let layer4 = new Konva.Layer();
 
-  // stage.container().style.backgroundImage = '..//static//assets//OIP.jpg';
+  // stage2.container().style.backgroundImage = '..//static//assets//OIP.jpg';
   //let imageObj = new Image();
   
 
@@ -231,6 +231,8 @@
     console.log(rect2);
   });
 </script>
+
+
 <script>
   let image = document.getElementById('output1');
   var loadFile1 = function(event) {
@@ -250,7 +252,7 @@
 
   let layer2 = new Konva.Layer();
 
-  // stage.container().style.backgroundImage = '..//static//assets//OIP.jpg';
+  // stage.container().style.backgroundImage = '../static/assets/OIP.jpg';
   //let imageObj = new Image();
   
 
@@ -351,7 +353,7 @@
     );
     tr.nodes(selected);
   });
-
+  
   // clicks should select/deselect shapes
   stage.on('click tap', function (e) {
     // if we are selecting with rect, do nothing
@@ -391,8 +393,10 @@
       tr.nodes(nodes);
     }
 
-    console.log(rect2);
   });
+ 
+
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
