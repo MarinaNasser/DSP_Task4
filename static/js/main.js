@@ -25,13 +25,6 @@ $(document).ready(function() {
               $(this).parent(".pip").remove();
             });
             
-            // Old code here
-            /*$("<img></img>", {
-              class: "imageThumb",
-              src: e.target.result,
-              title: file.name + " | Click to remove"
-            }).insertAfter("#files").click(function(){$(this).remove();});*/
-            
           });
           fileReader.readAsDataURL(f);
         }

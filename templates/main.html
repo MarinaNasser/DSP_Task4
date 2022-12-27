@@ -27,15 +27,15 @@
   <h2>WEBSITE NAME</h2>
 </div>
 
-
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h2>First Photo</h2>
       <div class="container" >
-        <input type="file" accept="image/*" value="" id="image1" onchange="loadFile1(event)">
-              <p><img id="output1" width="350"/></p>
+        <input type="file" accept="image/*" onchange="loadFile1(event)">
+          <p><img id="output1" width="0" style="visibility: hidden; " /></p>
       </div>
+      <div id="container"></div>
         
       <div class="row">
         <div class="col-sm-5">
@@ -49,14 +49,9 @@
       <h2>Second Photo</h2>
       <div class="container">
         <input type="file" accept="image/*" onchange="loadFile(event)">
-              <p><img id="output2" width="350"/></p>
-              <script>
-                  var loadFile = function(event) {
-                      var image = document.getElementById('output2');
-                      image.src=URL.createObjectURL(event.target.files[0]);
-                  };
-              </script>
+              <p><img id="output2" width="0" style="visibility: hidden; "/></p>
       </div>
+      <div id="container2"></div>
       <div class="row">
         <div class="col-sm-5">
           <button id = "mag2"> Magnitude</button></div>
@@ -66,7 +61,7 @@
     </div>
     <div class="col-sm-4">
         <h2>Result</h2>
-        <div id="container"></div>
+        
     </div>
 
   </div>
@@ -74,12 +69,176 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+  let image2 = document.getElementById('output2');
+  var loadFile = function(event) {
+      image2.src=URL.createObjectURL(event.target.files[0]);
+  };
+  
+  let width2 = 300;
+  let height2 = 300;
+
+  let stage2 = new Konva.Stage({
+      container: 'container2',
+      width: width,
+      height: height,
+  });
+
+  let layer3 = new Konva.Layer();
+
+  let layer4 = new Konva.Layer();
+
+  // stage.container().style.backgroundImage = '..//static//assets//OIP.jpg';
+  //let imageObj = new Image();
+  
+
+  image2.onload = function () {
+      let yoda = new Konva.Image({
+          x: 0,
+          y: 0,
+          image: image2,
+          width: stage2.width(),
+          height: stage2.height(),
+      });
+
+      // add the shape to the layer
+      layer3.add(yoda);
+  };
+
+  let rect1 = new Konva.Rect({
+      x: 0,
+      y: 0,
+      width: 150,
+      height: 90,
+      fill: 'blue',
+      name: 'rect1',
+      draggable: true,
+      opacity: 0.1,
+  });
+
+  
+  layer4.add(rect1);
+  
+
+  stage2.add(layer3);
+  stage2.add(layer4);
+
+  let tr1 = new Konva.Transformer();
+  layer4.add(tr1);
+ 
+
+  // by default select all shapes
+  tr1.nodes([ rect1]);
+
+  // add a new feature, lets add ability to draw selection rectangle
+  let selectionRectangle1 = new Konva.Rect({
+    fill: 'rgba(0,0,255,0.5)',
+    visible: false,
+  });
+  layer3.add(selectionRectangle1);
+
+  let x3, y3, x4, y4;
+  stage2.on('mousedown touchstart', (e) => {
+    // do nothing if we mousedown on any shape
+    if (e.target !== stage2) {
+      return;
+    }
+    e.evt.preventDefault();
+    x3 = stage2.getPointerPosition().x;
+    y3 = stage2.getPointerPosition().y;
+    x4 = stage2.getPointerPosition().x;
+    y4 = stage2.getPointerPosition().y;
+
+    selectionRectangle1.visible(true);
+    selectionRectangle1.width(0);
+    selectionRectangle1.height(0);
+  });
+
+  stage2.on('mousemove touchmove', (e) => {
+    // do nothing if we didn't start selection
+    if (!selectionRectangle1.visible()) {
+      return;
+    }
+    e.evt.preventDefault();
+    x4 = stage2.getPointerPosition().x;
+    y4 = stage2.getPointerPosition().y;
+
+    selectionRectangle1.setAttrs({
+      x: Math.min(x3, x4),
+      y: Math.min(y3, y4),
+      width: Math.abs(x4 - x3),
+      height: Math.abs(y4 - y3),
+    });
+  });
+
+  stage2.on('mouseup touchend', (e) => {
+    // do nothing if we didn't start selection
+    if (!selectionRectangle1.visible()) {
+      return;
+    }
+    e.evt.preventDefault();
+    // update visibility in timeout, so we can check it in click event
+    setTimeout(() => {
+      selectionRectangle1.visible(false);
+    });
+
+    let shapes1 = stage2.find('.rect1');
+    let box1 = selectionRectangle1.getClientRect();
+    let selected1 = shapes1.filter((shape) =>
+      Konva.Util.haveIntersection(box1, shape.getClientRect())
+    );
+    tr1.nodes(selected1);
+  });
+
+  // clicks should select/deselect shapes
+  stage2.on('click tap', function (e) {
+    // if we are selecting with rect, do nothing
+    if (selectionRectangle1.visible()) {
+      return;
+    }
+
+    // if click on empty area - remove all selections
+    if (e.target === stage2) {
+      tr1.nodes([]);
+      return;
+    }
+
+    // do nothing if clicked NOT on our rectangles
+    if (!e.target.hasName('rect1')) {
+      return;
+    }
+
+    // do we pressed shift or ctrl?
+    const metaPressed1 = e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey;
+    const isSelected1 = tr1.nodes().indexOf(e.target) >= 0;
+
+    if (!metaPressed1 && !isSelected1) {
+      // if no key pressed and the node is not selected
+      // select just one
+      tr1.nodes([e.target]);
+    } else if (metaPressed1 && isSelected1) {
+      // if we pressed keys and node was selected
+      // we need to remove it from selection:
+      const nodes = tr1.nodes().slice(); // use slice to have new copy of array
+      // remove node from array
+      nodes.splice(nodes.indexOf(e.target), 1);
+      tr1.nodes(nodes);
+    } else if (metaPressed1 && !isSelected1) {
+      // add the node into selection
+      const nodes = tr1.nodes().concat([e.target]);
+      tr1.nodes(nodes);
+    }
+
+    console.log(rect2);
+  });
+</script>
+<script>
   let image = document.getElementById('output1');
   var loadFile1 = function(event) {
       image.src=URL.createObjectURL(event.target.files[0]);
   };
-  let width = 500;
-  let height = 500;
+ 
+  let width = 300;
+  let height = 300;
 
   let stage = new Konva.Stage({
       container: 'container',
@@ -116,7 +275,7 @@
       fill: 'blue',
       name: 'rect',
       draggable: true,
-      opacity: 0.4,
+      opacity: 0.1,
   });
 
   
