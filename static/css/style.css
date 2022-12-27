@@ -30,3 +30,9 @@ input[type="file"] {
 input[type="button"] {
     background-color: brown;
 }
+
+.item {
+    display: block;
+    width: 100px;
+    height:100px;
+}

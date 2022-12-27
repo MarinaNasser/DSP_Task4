@@ -1,5 +1,7 @@
 import numpy as np
 from PIL import image #pip install Pillow
+import matplotlib.pyplot as plt
+import random
 
 def crop(image_path, coords, saved_location):
     """
@@ -22,4 +24,12 @@ def reconstruct_image(mag,phase):
     img_comb = np.multiply(mag, np.exp(1j * phase))
     resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
     return resulting_img
+
+def plot_magnitude(img_magnitude):
+    plt.figure(figsize=[15, 8])
+    plt.imshow(np.log(img_magnitude+1e-10), cmap='gray')
+    path = f'static/img/magnitude{random.randint(1,10000)}.jpg'
+    plt.savefig(path)
+    plt.close()
+    return path
 
