@@ -1,0 +1,32 @@
+input[type="file"] {
+    display: block;
+}
+.imageThumb {
+    max-height: 180px;
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 1px;
+    cursor: pointer;
+}
+.pip {
+    display: table;
+    margin: 10px 10px 0 0;
+}
+.remove {
+    display: block;
+    /* background: #444; */
+    /* border: 1px solid black; */
+    /* color: white; */
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 17px;
+}
+.remove:hover {
+    background: white;
+    color: black;
+}
+
+input[type="button"] {
+    background-color: brown;
+}

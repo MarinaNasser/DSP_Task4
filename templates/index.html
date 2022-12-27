@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='image/breast-cancer.ico.ico') }}" type="image/png"/>
+	<title>Task 4 </title>
+   
+	<!-- aos css file cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <!-- <div class="nav_bar">
+        <input id="firstInput" type="file" accept="image/*" onchange="loadImage(event)">
+        <input id="secondInput" type="file" accept="image/*" onchange="loadImage(event)">
+    </div> -->
+    <div class="big_container">
+        <div class="column">
+            <div class="field" align="left">
+                <h3>Upload your images</h3>
+                <input type="file" id="files" name="files[]" multiple />
+            </div>
+        </div>
+        <div class="column">
+            <canvas id="canvas" class="canvas" width="250" height="250" style="border:1px solid"></canvas>
+            <canvas id="canvas2" class="canvas" width="250" height="250" style="border:1px solid"></canvas>
+        </div>
+    </div>
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
