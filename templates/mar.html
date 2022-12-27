@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Task 4 </title>
+
+    <!-- aos css file cdn link  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- font awesome cdn link  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- custom css file link  -->
+    <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script>
+
+</head>
+<body>
+<!-- <div class="nav_bar">
+    <input id="firstInput" type="file" accept="image/*" onchange="loadImage(event)">
+    <input id="secondInput" type="file" accept="image/*" onchange="loadImage(event)">
+</div> -->
+<!-- <div class="big_container"> -->
+<!-- <div class="column"> -->
+<div id="container"></div>
+<script>
+    //       let loadFile1 = function(event) {
+    //     let image = document.getElementById('output1');
+    //     image.src=URL.createObjectURL(event.target.files[0]);
+    // };
+    let width = 500;
+    let height = 500;
+
+    let stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+    });
+
+    let layer = new Konva.Layer();
+
+    let layer2 = new Konva.Layer();
+
+    // stage.container().style.backgroundImage = '..//static//assets//OIP.jpg';
+    let imageObj = new Image();
+
+    imageObj.onload = function () {
+        let yoda = new Konva.Image({
+            x: 0,
+            y: 0,
+            image: imageObj,
+            width: stage.width(),
+            height: stage.height(),
+        });
+
+        // add the shape to the layer
+        layer.add(yoda);
+    };
+    imageObj.src = '../static/assets/OIP.jpg';
+
+    let rect2 = new Konva.Rect({
+        x: 0,
+        y: 0,
+        width: 150,
+        height: 90,
+        fill: 'blue',
+        name: 'rect',
+        draggable: true,
+        opacity: 0.4,
+    });
+
+    let rect23 = new Konva.Rect({
+        x: 50,
+        y: 0,
+        width: 150,
+        height: 90,
+        fill: 'green',
+        name: 'rect',
+        draggable: true,
+        opacity: 0.4,
+    });
+    layer2.add(rect2);
+    layer2.add(rect23);
+
+    stage.add(layer);
+    stage.add(layer2);
+
+    let tr = new Konva.Transformer();
+    layer.add(tr);
+
+    // by default select all shapes
+    tr.nodes([ rect2]);
+
+    // add a new feature, lets add ability to draw selection rectangle
+    let selectionRectangle = new Konva.Rect({
+      fill: 'rgba(0,0,255,0.5)',
+      visible: false,
+    });
+    layer.add(selectionRectangle);
+
+    let x1, y1, x2, y2;
+    stage.on('mousedown touchstart', (e) => {
+      // do nothing if we mousedown on any shape
+      if (e.target !== stage) {
+        return;
+      }
+      e.evt.preventDefault();
+      x1 = stage.getPointerPosition().x;
+      y1 = stage.getPointerPosition().y;
+      x2 = stage.getPointerPosition().x;
+      y2 = stage.getPointerPosition().y;
+
+      selectionRectangle.visible(true);
+      selectionRectangle.width(0);
+      selectionRectangle.height(0);
+    });
+
+    stage.on('mousemove touchmove', (e) => {
+      // do nothing if we didn't start selection
+      if (!selectionRectangle.visible()) {
+        return;
+      }
+      e.evt.preventDefault();
+      x2 = stage.getPointerPosition().x;
+      y2 = stage.getPointerPosition().y;
+
+      selectionRectangle.setAttrs({
+        x: Math.min(x1, x2),
+        y: Math.min(y1, y2),
+        width: Math.abs(x2 - x1),
+        height: Math.abs(y2 - y1),
+      });
+    });
+
+    stage.on('mouseup touchend', (e) => {
+      // do nothing if we didn't start selection
+      if (!selectionRectangle.visible()) {
+        return;
+      }
+      e.evt.preventDefault();
+      // update visibility in timeout, so we can check it in click event
+      setTimeout(() => {
+        selectionRectangle.visible(false);
+      });
+
+      let shapes = stage.find('.rect');
+      let box = selectionRectangle.getClientRect();
+      let selected = shapes.filter((shape) =>
+        Konva.Util.haveIntersection(box, shape.getClientRect())
+      );
+      tr.nodes(selected);
+    });
+
+    // clicks should select/deselect shapes
+    stage.on('click tap', function (e) {
+      // if we are selecting with rect, do nothing
+      if (selectionRectangle.visible()) {
+        return;
+      }
+
+      // if click on empty area - remove all selections
+      if (e.target === stage) {
+        tr.nodes([]);
+        return;
+      }
+
+      // do nothing if clicked NOT on our rectangles
+      if (!e.target.hasName('rect')) {
+        return;
+      }
+
+      // do we pressed shift or ctrl?
+      const metaPressed = e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey;
+      const isSelected = tr.nodes().indexOf(e.target) >= 0;
+
+      if (!metaPressed && !isSelected) {
+        // if no key pressed and the node is not selected
+        // select just one
+        tr.nodes([e.target]);
+      } else if (metaPressed && isSelected) {
+        // if we pressed keys and node was selected
+        // we need to remove it from selection:
+        const nodes = tr.nodes().slice(); // use slice to have new copy of array
+        // remove node from array
+        nodes.splice(nodes.indexOf(e.target), 1);
+        tr.nodes(nodes);
+      } else if (metaPressed && !isSelected) {
+        // add the node into selection
+        const nodes = tr.nodes().concat([e.target]);
+        tr.nodes(nodes);
+      }
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
+</body>
+</html>
