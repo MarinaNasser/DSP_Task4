@@ -1,5 +1,5 @@
 import numpy as np
-from PIL import image #pip install Pillow
+from PIL import Image #pip install Pillow
 import matplotlib.pyplot as plt
 import random
 
@@ -17,7 +17,7 @@ def reconstruct_image(mag,phase):
 def plot_magnitude(img_magnitude):
     plt.figure(figsize=[15, 8])
     plt.imshow(np.log(img_magnitude+1e-10), cmap='gray')
-    path = f'static/img/magnitude{random.randint(1,10000)}.jpg'
+    path = f'static/img/magnitude1.jpg'
     plt.savefig(path)
     plt.close()
     return path

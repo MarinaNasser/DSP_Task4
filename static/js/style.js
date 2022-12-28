@@ -328,3 +328,28 @@ let image2 = document.getElementById('output2');
   });
  
 
+
+var mag1 = document.getElementById('mag1');
+const magImg = document.getElementById("magImg");
+const mag_url = "../static/img/download.jpeg"
+
+
+mag1.addEventListener("click",function(){
+  let formdata = new FormData();
+  
+  $.ajax({
+    type: "POST",
+      url: 'http://127.0.0.1:5000/mag2',
+      data: formdata,
+      contentType: false,
+      cache: false,
+      processData: false,
+
+      success: function (res) {
+          $('#output').text(res.output).show();
+          magImg.setAttribute("src", `${mag_url}?r=${new Date().getTime()}`);
+
+      },
+  });
+
+});
