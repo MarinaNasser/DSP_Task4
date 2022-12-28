@@ -1,5 +1,4 @@
 import numpy as np
-from PIL import image #pip install Pillow
 import matplotlib.pyplot as plt
 import random
 

@@ -27,11 +27,16 @@
         
       <div class="row">
         <div class="col-sm-5">
-          <button id = "mag1"> Magnitude</button></div>
-          <div class="col-sm-5">
-          <button id = "phase1"> Phase</button></div>
+          <form action="/mag1/" method="post">
+            <button name="mag1Btn" type="submit">Magnitude</button>
+          </form>
         </div>
-        
+          <div class="col-sm-5">
+            <form action="/phase1/" method="post">
+              <button name="phase1Btn" type="submit">Phase</button>
+            </form>
+        </div>
+      </div>
     </div>
     <div class="col-sm-4">
       <h2>Second Photo</h2>
@@ -42,9 +47,14 @@
       <div id="container2"></div>
       <div class="row">
         <div class="col-sm-5">
-          <button id = "mag2" > Magnitude</button></div>
+          <form action="/mag2/" method="post">
+            <button name="mag2Btn" type="submit">Magnitude</button>
+          </form></div>
           <div class="col-sm-5">
-          <button id = "phase2"> Phase</button></div>
+            <form action="/phase2/" method="post">
+              <button name="phase2Btn" type="submit">Phase</button>
+            </form>
+          </div>
       </div>
     </div>
     <div class="col-sm-4">
