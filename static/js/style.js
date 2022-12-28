@@ -1,8 +1,10 @@
 
 
 let image2 = document.getElementById('output2');
+var image2path=null;
   var loadFile = function(event) {
       image2.src=URL.createObjectURL(event.target.files[0]);
+      image2path=image2.src;
   };
   
   let width2 = 300;

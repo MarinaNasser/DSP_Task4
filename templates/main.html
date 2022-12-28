@@ -36,7 +36,13 @@
               <button name="phase1Btn" type="submit">Phase</button>
             </form>
         </div>
-        <img  id="magImg" src="../static/img/magnitude1.jpg" >
+        <p><img id="mag1" width="350"/></p>
+              <script>
+                  var loadFile1 = function(event) {
+                      var image = document.getElementById('mag1');
+                      image.src=URL.createObjectURL(event.target.files[0]);
+                  };
+              </script>
       </div>
     </div>
     <div class="col-sm-4">

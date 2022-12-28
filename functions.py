@@ -16,8 +16,15 @@ def reconstruct_image(mag,phase):
 def plot_magnitude(img_magnitude):
     plt.figure(figsize=[15, 8])
     plt.imshow(np.log(img_magnitude+1e-10), cmap='gray')
-    path = f'static/img/magnitude1.jpg'
+    path = f'static/img/magnitude{random.randint(1,10000)}.jpg'
+    plt.savefig(path)
+    plt.close()
+    return path
 
+def plot_phase(img_phase):
+    plt.figure(figsize=[15, 8])
+    plt.imshow((img_phase), cmap='gray')
+    path = f'static/img/phase{random.randint(1,10000)}.jpg'
     plt.savefig(path)
     plt.close()
     return path
