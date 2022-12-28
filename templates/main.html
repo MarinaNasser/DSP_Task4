@@ -22,6 +22,7 @@
       <div class="container" >
         <form action="{{url_for('uploadPhoto')}}" method="POST">
           <input type="file" id="fileUpload" name = 'img' onchange="submit()">
+          <input style="visibility: hidden; " name='sender' value='1'> 
         </form>
        {%if path%}
          <p> "{{path}}" </p>
@@ -30,7 +31,6 @@
        {%if pathOfMag%}
         <img src="{{pathOfMag}}" alt="mag">
        {%endif%}
-        <input type="file" accept="image/*" onchange="loadFile1(event)">
           <p><img id="output1" width="0" style="visibility: hidden; " /></p>
       </div>
       <div id="container"></div>
@@ -58,7 +58,12 @@
     <div class="col-sm-4">
       <h2>Second Photo</h2>
       <div class="container">
-        <input type="file" accept="image/*" onchange="loadFile(event)">
+        <form action="{{url_for('uploadPhoto')}}" method="POST">
+          
+          <input type="file" id="fileUpload1" name = 'img' onchange="submit()">
+          <input style="visibility: hidden;" name='sender' value='2' > 
+        </form>
+
               <p><img id="output2" width="0" style="visibility: hidden; "/></p>
       </div>
       <div id="container2"></div>
@@ -83,6 +88,9 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  var path = '../static/assets/'+'{{name}}'
+</script>
 <script src="..\static\js\style.js"></script>
 </body>
 </html>

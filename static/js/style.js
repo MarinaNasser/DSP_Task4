@@ -190,19 +190,35 @@ var image2path=null;
   //let imageObj = new Image();
   
 
-  image.onload = function () {
-      let yoda = new Konva.Image({
-          x: 0,
-          y: 0,
-          image: image,
-          width: stage.width(),
-          height: stage.height(),
-      });
+  // image.onload = function () {
+  //     let yoda = new Konva.Image({
+  //         x: 0,
+  //         y: 0,
+  //         image: image,
+  //         width: stage.width(),
+  //         height: stage.height(),
+  //     });
 
-      // add the shape to the layer
-      layer.add(yoda);
-  };
+  //     // add the shape to the layer
+  //     layer.add(yoda);
+  // };
+  let imageObj = new Image();
 
+    imageObj.onload = function () {
+        let yoda = new Konva.Image({
+            x: 0,
+            y: 0,
+            image: imageObj,
+            width: stage.width(),
+            height: stage.height(),
+        });
+
+        // add the shape to the layer
+        layer.add(yoda);
+    };
+    console.log(path);
+    imageObj.src = path;
+    
   let rect = new Konva.Rect({
       x: 0,
       y: 0,

@@ -1,0 +1,2 @@
+        <input type="file" accept="image/*" onchange="loadFile1(event)">
+        <input type="file" accept="image/*" onchange="loadFile(event)">
