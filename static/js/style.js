@@ -329,4 +329,8 @@ var image2path=null;
 
   });
  
-
+  function submit() {
+    let form = document.getElementById("form");
+    form.submit();
+    alert("Data stored in database!");
+}

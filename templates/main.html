@@ -20,6 +20,16 @@
     <div class="col-sm-4">
       <h2>First Photo</h2>
       <div class="container" >
+        <form action="{{url_for('uploadPhoto')}}" method="POST">
+          <input type="file" id="fileUpload" name = 'img' onchange="submit()">
+        </form>
+       {%if path%}
+         <p> "{{path}}" </p>
+         <img src="{{path}}" alt="Italian Trulli">
+       {%endif%}
+       {%if pathOfMag%}
+        <img src="{{pathOfMag}}" alt="mag">
+       {%endif%}
         <input type="file" accept="image/*" onchange="loadFile1(event)">
           <p><img id="output1" width="0" style="visibility: hidden; " /></p>
       </div>
