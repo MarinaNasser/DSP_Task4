@@ -53,8 +53,8 @@ def getC():
         phaseIdx = 2
     else:
         phaseIdx = 1
-    newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,1,1)
-    newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,1,0)
+    newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,0,1)
+    newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,0,0)
     newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
     images[3] = Image(newImgPath)
     return render_template('main.html',images = images)

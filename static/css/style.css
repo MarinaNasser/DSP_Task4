@@ -1,0 +1,116 @@
+.column h2, .result h2{
+    margin-bottom: 3px;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0px;
+
+}
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 49px;
+    margin-top: 40px;
+
+}
+.column{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 4px;
+    border-top-style: double;
+    border-left-style: double;
+    margin: 1rem;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 50%);
+    border-left-color: #2b5876;
+    border-top-color: #2b5876;
+
+}
+#fileUpload, #fileUpload1{
+    display: block;
+    width: 116px;
+
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    height: 30px;
+    width: 12px;
+    margin-left: 210px;
+    justify-content: center;
+}
+.result_container {
+    text-align: center;
+    margin: 20px;
+    margin-top: 53px;
+
+}
+.image_container {
+    text-align: center;
+    margin: 20px;
+    margin-top: 53px;
+
+}
+.image_container p{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
+}
+
+#container1, #container2{
+    align-self: center;
+    margin-top: 15px;
+}
+
+input[type="file"]::file-selector-button, .btn {
+    background-image: linear-gradient(
+        to right,
+        #29323c,
+        #485563,
+        #2b5876,
+        #4e4376
+      );
+    width: 105px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 8px;
+    height: 41px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+
+}
+
+input[type="file"]::file-selector-button:hover ,.btn:hover{
+    color: #fff;
+    background-position: 100% 0;
+}
+
+.btn1{
+    align-self: center;
+}
+
+
+.result{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 4px;
+    border-top-style: double;
+    border-left-style: double;
+    margin: 1rem;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 50%);
+    border-left-color: #2b5876;
+    border-top-color: #2b5876;
+    height: 373px;
+    margin-top: 122px;
+}

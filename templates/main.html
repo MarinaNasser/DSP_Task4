@@ -10,96 +10,83 @@
   <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 <body>
 
-<div class="jumbotron text-center" style="margin-bottom:1">
-  <h2> WEBSITE NAME </h2>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
+
+  <div class="container">
+    <div class="column">
       <h2>First Photo</h2>
-      <div class="container" >
+      <div class="options"  >
         <form action="{{url_for('uploadPhoto')}}" method="POST">
           <input type="file" id="fileUpload" name = 'img1' onchange="submit()">
           <input style="visibility: hidden; " name='sender' value='1'> 
         </form>
-       {%if images[1]%}
-         <img src="{{images[1].spatialDomainPath}}" alt="image 1">
-       {%endif%}
-       
-          <p><img id="output1" width="0" style="visibility: hidden; " /></p>
       </div>
-      <div id="container"></div>
-        
-      <div class="row">
-        <div class="col-sm-5">
-          <form action="{{url_for('switch')}}" method="POST">
-            <input style="visibility: hidden; " name='sender' value='11'> 
-            <button name="mag1Btn" type="submit">Magnitude</button>
-          </form>
-        </div>
-          <div class="col-sm-5">
-            <form action="{{url_for('switch')}}" method="POST">
-              <input style="visibility: hidden; " name='sender' value='12'> 
-              <button name="phase1Btn" type="submit">Phase</button>
-            </form>
-        </div>
-        <p><img id="mag1" width="350"/></p>
-              <script>
-                  var loadFile1 = function(event) {
-                      var image = document.getElementById('mag1');
-                      image.src=URL.createObjectURL(event.target.files[0]);
-                  };
-              </script>
+      <div class="options">
+        <form action="{{url_for('switch')}}" method="POST">
+          <input style="visibility: hidden; " name='sender' value='11'> 
+          <button class="btn" name="mag1Btn" type="submit">Magnitude</button>
+        </form>
+        <form action="{{url_for('switch')}}" method="POST">
+          <input style="visibility: hidden; " name='sender' value='12'> 
+          <button class="btn" name="phase1Btn" type="submit">Phase</button>
+        </form>
       </div>
+      <div class="image_container" >
+        {%if images[1]%}
+          <img src="{{images[1].spatialDomainPath}}" alt="image 1">
+        {%endif%}
+      </div>  
+      <h2>Magnitude</h2>
+      <div id="container1"></div>
     </div>
-    <div class="col-sm-4">
+
+    <div class="column">
       <h2>Second Photo</h2>
-      <div class="container">
+      <div class="options">
         <form action="{{url_for('uploadPhoto')}}" method="POST">
-          
           <input type="file" id="fileUpload1" name = 'img2' onchange="submit()">
           <input style="visibility: hidden;" name='sender' value='2' > 
         </form>
+      </div>
+      <div class="options">
+        <form action="{{url_for('switch')}}" method="POST">
+          <input style="visibility: hidden; " name='sender' value='21'> 
+          <button class="btn" name="mag2Btn" type="submit">Magnitude</button>
+        </form>
+        <form action="{{url_for('switch')}}" method="POST">
+          <input style="visibility: hidden; " name='sender' value='22'> 
+          <button class="btn" name="phase2Btn" type="submit">Phase</button>
+        </form>
+      </div>
+      <div class="image_container">
         {%if images[2]%}
-         <img src="{{images[2].spatialDomainPath}}" alt="image 2">
-       {%endif%}
-       
-        <p><img id="output2" width="0" style="visibility: hidden; "/></p>
+          <img src="{{images[2].spatialDomainPath}}" alt="image 2">
+        {%endif%}
       </div>
-      <div id="container2"></div>
-      <div class="row">
-        <div class="col-sm-5">
-          <form action="{{url_for('switch')}}" method="POST">
-            <input style="visibility: hidden; " name='sender' value='21'> 
-            <button name="mag2Btn" type="submit">Magnitude</button>
-          </form></div>
-          <div class="col-sm-5">
-            <form action="{{url_for('switch')}}" method="POST">
-              <input style="visibility: hidden; " name='sender' value='22'> 
-              <button name="phase2Btn" type="submit">Phase</button>
-            </form>
-          </div>
-          
-      </div>
-    </div>
-    <button name="rect" id='zorar' >zorar</button>
-    <div class="col-sm-4">
-        <h2>Result</h2>
-        <h1>"{{images[3].spatialDomainPath}}"</h1>
-         <img src="{{images[3].spatialDomainPath}}" alt="image 3">
-       
+      <h2>Magnitude</h2>
+      <div id="container2"></div>        
     </div>
 
+
+    <div class="result">
+      <h2>Result</h2>
+      <button class="btn btn1" name="rect" id='zorar' >zorar</button>
+      <div class="result_container" >
+        {%if images[3]%}
+          <img src="{{images[3].spatialDomainPath}}" alt="image 3">
+        {%endif%}
+      </div>   
+    </div>
   </div>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<script type="text/javascript">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
   {%if images[1]%}
     
     var path = '../static/assets/'+'{{images[1].getPathOfMagOrPhasePlot(images[1].takenMag == 1)}}'
@@ -111,9 +98,8 @@
   {%else%}
     var path2 = " "
   {%endif%}
-  
-</script>
-<script src="..\static\js\style.js"></script>
+  </script>
+  <script src="..\static\js\style.js"></script>
 </body>
 </html>
 
