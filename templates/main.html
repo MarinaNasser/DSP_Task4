@@ -15,34 +15,30 @@
 </head>
 <body>
 
-<div class="Title">
-  <h2> WEBSITE NAME </h2>
-</div>
-
 <div class="container">
   <div class="column">
     <h2>First Photo</h2>
-    <div class="options" >
+    <div class="options"  >
       <form action="{{url_for('uploadPhoto')}}" method="POST">
         <input type="file" id="fileUpload" name = 'img1' onchange="submit()">
-        <input style="visibility: hidden; " name='sender' value='1'> 
+        <input style="visibility: hidden; height:0px;" name='sender' value='1'> 
       </form>
     </div>
     <div class="options">
       <form action="{{url_for('switch')}}" method="POST">
-        <input style="visibility: hidden; " name='sender' value='11'> 
-        <button name="mag1Btn" type="submit">Magnitude</button>
+        <input style="visibility: hidden; height:0px; " name='sender' value='11'> 
+        <button class="btn" name="mag1Btn" id="mag1Btn" type="submit" ">Magnitude</button>
       </form>
       <form action="{{url_for('switch')}}" method="POST">
-        <input style="visibility: hidden; " name='sender' value='12'> 
-        <button name="phase1Btn" type="submit">Phase</button>
+        <input style="visibility: hidden; height:0px; " name='sender' value='12'> 
+        <button  class="btn" name="phase1Btn" id="phase1Btn" type="submit" " ">Phase</button>
       </form>
     </div>
     <div class="image_container" >
       {%if images[1]%}
          <img src="{{images[1].spatialDomainPath}}" alt="image 1">
-       {%endif%}
-    </div>      
+      {%endif%}
+    </div>     
     <div id="container1"></div>
   </div>
 
@@ -52,17 +48,17 @@
       <form action="{{url_for('uploadPhoto')}}" method="POST">
           
         <input type="file" id="fileUpload1" name = 'img2' onchange="submit()">
-        <input style="visibility: hidden;" name='sender' value='2' > 
+        <input style="visibility: hidden; height:0px;" name='sender' value='2' > 
       </form>
     </div>
     <div class="options">
-      <form action="{{url_for('switch')}}" method="POST">
-        <input style="visibility: hidden; " name='sender' value='21'> 
-        <button name="mag2Btn" type="submit">Magnitude</button>
+      <form action="{{url_for('switch')}}" method="POST" style="height:0px;">
+        <input style="visibility: hidden; height:0px; " name='sender' value='21'> 
+        <button class="btn" name="mag2Btn" id="mag2Btn" type="submit">Magnitude</button>
       </form>
       <form action="{{url_for('switch')}}" method="POST">
-        <input style="visibility: hidden; " name='sender' value='22'> 
-        <button name="phase2Btn" type="submit">Phase</button>
+        <input style="visibility: hidden; height:0px;" name='sender' value='22'> 
+        <button class="btn" name="phase2Btn" id="phase2Btn" type="submit">Phase</button>
       </form>
     </div>
     <div class="image_container" >
@@ -73,7 +69,7 @@
     <div id="container2"></div>
   </div>
   
-  <button name="rect" id='zorar' >zorar</button>
+  <!-- <button name="rect" id='zorar' >zorar</button> -->
   <div class="column">
     <h2>Result</h2>
     <div class="image_container" >
