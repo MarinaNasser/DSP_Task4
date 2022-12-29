@@ -23,19 +23,22 @@ var image2path=null;
   // stage2.container().style.backgroundImage = '..//static//assets//OIP.jpg';
   //let imageObj = new Image();
   
+let imageObj2 = new Image();
 
-  image2.onload = function () {
-      let yoda = new Konva.Image({
-          x: 0,
-          y: 0,
-          image: image2,
-          width: stage2.width(),
-          height: stage2.height(),
-      });
+    imageObj2.onload = function () {
+        let yoda = new Konva.Image({
+            x: 0,
+            y: 0,
+            image: imageObj2,
+            width: stage.width(),
+            height: stage.height(),
+        });
 
-      // add the shape to the layer
-      layer3.add(yoda);
-  };
+        // add the shape to the layer
+        layer3.add(yoda);
+    };
+    console.log(path2);
+    imageObj2.src = path2;
 
   let rect1 = new Konva.Rect({
       x: 0,

@@ -6,40 +6,51 @@ import cv2
 class Image:
     
     takenMag = 0
-    takenPhase = 0
     
-    def __init__(self,spatialDomainData):
-        self.spatialDomainData = spatialDomainData
-
+    def __init__(self,spatialDomainPath):
+        self.spatialDomainPath = spatialDomainPath
+        
+    def getSpatialDomainData(self):
+        return cv2.imread(self.spatialDomainPath,0)
     def getfft(self):
-        return np.fft.fft2(self.spatialDomainData)
+        return np.fft.fft2(self.getSpatialDomainData())
     
     def getfftshift(self):
         return np.fft.fftshift(self.getfft())
     def getMag(self):
         return np.sqrt(np.real(self.getfftshift()) ** 2 + np.imag(self.getfftshift()) ** 2)
+    
     def getPhase(self):
-        return np.arctan2(np.imag(self.getfftshift()), np.real(self.getfftshift()))
+        return np.angle(self.getfftshift())
+        # return np.arctan2(np.imag(self.getfftshift()), np.real(self.getfftshift()))
+    
+    def scale(self,image_array):
+        image=((image_array - image_array.min()) * (1/(image_array.max() - image_array.min()) * 255)).astype('uint8')
+        return image
+    
     def getPathOfMagOrPhasePlot(self,magTPhaseF):
-        plt.figure(figsize=[15, 8])
-        
+        # if 1 get mag if 0 get phase
         if magTPhaseF:
-            plt.imshow(np.log(self.getMag()+1e-10), cmap='gray')
             name = f'magnitude{random.randint(1,10000)}.jpg'
         else:
-            plt.imshow((self.getPhase()), cmap='gray')
             name = f'phase{random.randint(1,10000)}.jpg'
         path = f'static/assets/{name}'
-        plt.savefig(path)
-        plt.close()
-        return path
+        if magTPhaseF:
+            cv2.imwrite(path,20*np.log(np.abs(self.getMag())))
+        else:
+            cv2.imwrite(path,self.scale(self.getPhase()))
+        return name
     
     @staticmethod
     def mixMagAndPhase(mag,phase):
         img_comb = np.multiply(mag, np.exp(1j * phase))
         resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
         return resulting_img
+
+
     
+    
+#not needed any more    
 def fourier_transform_shift(img):
     img_fft= np.fft.fftshift(np.fft.fft2(img))
     img_magnitude = np.sqrt(np.real(img_fft) ** 2 + np.imag(img_fft) ** 2)
