@@ -353,3 +353,19 @@ let imageObj2 = new Image();
     form.submit();
     alert("Data stored in database!");
 }
+let zorar = document.getElementById('zorar');
+zorar.onclick = __=>{
+  $.ajax({
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/getC',
+    dataType: 'json',
+    async: false,
+    data: {
+        x: rect.attrs.x,
+        y: rect.attrs.y,
+    },
+    success: function (res, status, xhr) {
+        console.log(res);
+    }
+});
+}

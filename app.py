@@ -36,7 +36,13 @@ def uploadPhoto():
         
         return render_template('main.html',images = images)
 
+@app.route('/getC',methods=['POST'])
+def getC():
     
+    x = int(request.values['x'])
+    print('-'*54)
+    print(x)
+    return "0"
 if __name__ == "__main__":
     app.run(debug=True)
 
