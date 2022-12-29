@@ -33,7 +33,7 @@ def uploadPhoto():
         name = request.form['img'+f'{sender}']
         picPath = os.path.join(app.config['UPLOAD_FOLDER'],name)          
         images[sender] = Image(picPath)
-        
+        Image.takenMag = sender
         return render_template('main.html',images = images)
 
 @app.route('/getC',methods=['POST'])
