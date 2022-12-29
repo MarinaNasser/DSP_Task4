@@ -355,14 +355,40 @@ let imageObj2 = new Image();
 }
 let zorar = document.getElementById('zorar');
 zorar.onclick = __=>{
+
+
+  console.log(`
+   Width: ${rect1.width()}
+   Height: ${rect1.height()}
+   ScaleX: ${rect1.scaleX()}
+   ScaleY: ${rect1.scaleY()}
+
+   New Width: ${rect1.width() * rect1.scaleX()}
+   New Height: ${rect1.height() * rect1.scaleY()}
+
+  Width0: ${rect.width()}
+  Height0: ${rect.height()}
+  ScaleX0: ${rect.scaleX()}
+  ScaleY0: ${rect.scaleY()}
+
+  New Width0: ${rect.width() * rect.scaleX()}
+  New Height0: ${rect.height() * rect.scaleY()}
+  `)
+  
   $.ajax({
     method: 'POST',
     url: 'http://127.0.0.1:5000/getC',
     dataType: 'json',
     async: false,
     data: {
-        x: rect.attrs.x,
-        y: rect.attrs.y,
+        x1: rect.attrs.x,
+        y1: rect.attrs.y,
+        w1: rect.width() * rect.scaleX(),
+        h1: rect.width() * rect.scaleX(),
+        x2: rect1.attrs.x,
+        y2: rect1.attrs.y,
+        w2: rect1.width() * rect1.scaleX(),
+        h2: rect1.height() * rect1.scaleY(),
     },
     success: function (res, status, xhr) {
         console.log(res);

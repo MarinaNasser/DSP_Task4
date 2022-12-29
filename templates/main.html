@@ -67,6 +67,7 @@
         {%if images[2]%}
          <img src="{{images[2].spatialDomainPath}}" alt="image 2">
        {%endif%}
+       
         <p><img id="output2" width="0" style="visibility: hidden; "/></p>
       </div>
       <div id="container2"></div>
@@ -82,12 +83,15 @@
               <button name="phase2Btn" type="submit">Phase</button>
             </form>
           </div>
+          
       </div>
     </div>
     <button name="rect" id='zorar' >zorar</button>
     <div class="col-sm-4">
         <h2>Result</h2>
-        
+        <h1>"{{images[3].spatialDomainPath}}"</h1>
+         <img src="{{images[3].spatialDomainPath}}" alt="image 3">
+       
     </div>
 
   </div>

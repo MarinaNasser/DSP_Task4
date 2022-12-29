@@ -5,7 +5,7 @@ import cv2
 
 class Image:
     
-    takenMag = 0
+    takenMag = 1
     
     def __init__(self,spatialDomainPath):
         self.spatialDomainPath = spatialDomainPath
@@ -17,6 +17,12 @@ class Image:
     
     def getfftshift(self):
         return np.fft.fftshift(self.getfft())
+    
+    def getInverShift(self):
+        return np.fft.ifftshift(self.getfftshift())
+    def getInverseFourier(self):
+        return np.fft.ifft2(self.getInverShift())
+    
     def getMag(self):
         return np.sqrt(np.real(self.getfftshift()) ** 2 + np.imag(self.getfftshift()) ** 2)
     
@@ -28,6 +34,46 @@ class Image:
         image=((image_array - image_array.min()) * (1/(image_array.max() - image_array.min()) * 255)).astype('uint8')
         return image
     
+    def getMask(x,y,width,height,inverse):
+        x = int(float(x))
+        y = int(float(y))
+        height = int(float(height))
+        width = int(float(width))
+        mask = np.zeros((281,180),np.uint8)
+        # mask[crow-30:crow+30, ccol-30:ccol+30] = 1
+    
+    def getMasked(self,x,y,width,height,inverse,magTPhaseF):
+        
+        if magTPhaseF:
+            masked = self.getMag()
+        else:
+            masked = self.getPhase()
+        # masked = self.getfftshift()
+        rows, cols = self.getSpatialDomainData().shape
+        for i in range(rows):
+            for j in range(cols):
+                inRect = Image.inRect(i,j,x,y,width,height)
+                if inverse:
+                    if inRect:
+                        masked[i][j] = 0
+                else:
+                    if not inRect:
+                        masked[i][j] = 0
+        # masked = np.fft.ifftshift(masked)
+        print('masked')
+        return masked
+    def combine(fourierToMag,fourierToPhase):
+        combined = np.multiply(np.abs(fourierToMag), np.exp(1j*np.angle(fourierToPhase)))
+        newInSpatial = np.fft.ifft2(combined)
+        img_back = np.real(np.fft.ifft2(newInSpatial))
+        img_back = np.abs(newInSpatial)
+        
+        name = f'result{random.randint(1,10000)}.jpg'
+        path = f'static/assets/{name}'
+        cv2.imwrite(path,img_back)
+        print('combined')
+        print(path)
+        return path
     def getPathOfMagOrPhasePlot(self,magTPhaseF):
         # if 1 get mag if 0 get phase
         if magTPhaseF:
@@ -45,9 +91,18 @@ class Image:
     def mixMagAndPhase(mag,phase):
         img_comb = np.multiply(mag, np.exp(1j * phase))
         resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
-        return resulting_img
+        name = f'result{random.randint(1,10000)}.jpg'
+        path = f'static/assets/{name}'
+        cv2.imwrite(path,resulting_img)
+        return path
+    @staticmethod
+    def inRect(xi,yi,x,y,width,height):
+        if xi > x and xi < x+width and yi > y and yi < y + height:
+            return True
+        return False
 
-
+ 
+ 
     
     
 #not needed any more    
