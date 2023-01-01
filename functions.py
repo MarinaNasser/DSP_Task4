@@ -7,9 +7,11 @@ class Image:
     
     takenMag = 1
     
-    def __init__(self,spatialDomainPath):
+    def __init__(self,spatialDomainPath,takenInOrOut = 1):
         self.spatialDomainPath = spatialDomainPath
-        
+        self.takenInOrOut = takenInOrOut
+    def toggleInOrOut(self):
+        self.takenInOrOut = not self.takenInOrOut
     def getSpatialDomainData(self):
         return cv2.imread(self.spatialDomainPath,0)
     def getfft(self):
@@ -93,6 +95,7 @@ class Image:
         resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
         name = f'result{random.randint(1,10000)}.jpg'
         path = f'static/assets/{name}'
+        
         cv2.imwrite(path,resulting_img)
         return path
     @staticmethod

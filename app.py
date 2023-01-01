@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request, redirect,jsonify,session
+from flask import Flask, render_template, request, redirect,jsonify,session,url_for
 import functions
 from functions import Image
 import numpy as np
 import cv2
 import os
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 picFolder = os.path.join('static','assets')
 app.config['UPLOAD_FOLDER'] = picFolder
 
@@ -18,7 +19,12 @@ def home():
 
 @app.route('/switch',methods=['POST'])
 def switch():
-    if request.method == 'POST':
+    if request.method == 'POST' and 'inOrOutSender' in request.form:
+        inOrOutSender = int(request.form['inOrOutSender'])
+        images[inOrOutSender].toggleInOrOut()
+        return render_template('main.html',images = images)
+    
+    if request.method == 'POST' and 'sender' in request.form:
         sender = int(request.form['sender'])
         if sender in [11,22]:
             Image.takenMag = 1
@@ -36,11 +42,12 @@ def uploadPhoto():
         print(picPath)
         images[sender] = Image(picPath)
         Image.takenMag = sender
-        print(images[1].spatialDomainPath)
+        # print(images[1].spatialDomainPath)
         return render_template('main.html',images = images)
 
 @app.route('/getC',methods=['POST'])
 def getC():
+    
     x1 = int(float(request.values['x1']))
     y1 = int(float(request.values['y1']))
     w1 = int(float(request.values['w1']))
@@ -56,11 +63,12 @@ def getC():
         phaseIdx = 2
     else:
         phaseIdx = 1
-    newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,0,1)
-    newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,0,0)
+    newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,not images[1].takenInOrOut,1)
+    newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,not images[1].takenInOrOut,0)
     newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
     images[3] = Image(newImgPath)
     print(newImgPath)
+    return redirect(url_for('home', images=images))
     return render_template('main.html',images = images)
 if __name__ == "__main__":
     app.run(debug=True)
