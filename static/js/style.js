@@ -1,32 +1,5 @@
-function submit() {
-  let form = document.getElementById("form");
-  form.submit();
-  alert("Data stored in database!");
-}
-
-
-
-
-
-// let zorar = document.getElementById('zorar');
-// zorar.onclick = __=>{
-// $.ajax({
-//   method: 'POST',
-//   url: 'http://127.0.0.1:5000/getC',
-//   dataType: 'json',
-//   async: false,
-//   data: {
-//       x: rect.attrs.x,
-//       y: rect.attrs.y,
-//   },
-//   success: function (res, status, xhr) {
-//       console.log(res);
-//   }
-// });
-// }
-
-let width = 281;
-let height = 180;
+let width = 300;
+let height = 300;
 
 let stage = new Konva.Stage({
     container: 'container1',
@@ -35,8 +8,11 @@ let stage = new Konva.Stage({
 });
 
 let layer1 = new Konva.Layer();
+
 let layer2 = new Konva.Layer();
+
 let imageObj = new Image();
+
   imageObj.onload = function () {
       let yoda = new Konva.Image({
           x: 0,
@@ -45,13 +21,13 @@ let imageObj = new Image();
           width: stage.width(),
           height: stage.height(),
       });
+
       // add the shape to the layer
       layer1.add(yoda);
   };
-
-  console.log(path);
-  imageObj.src = path;
-
+console.log(path);
+imageObj.src = path;
+  
 let rect = new Konva.Rect({
     x: 0,
     y: 0,
@@ -175,9 +151,8 @@ stage.on('click tap', function (e) {
 
 });
 
-
-let width2 = 281;
-let height2 = 180;
+let width2 = 300;
+let height2 = 300;
 
 let stage2 = new Konva.Stage({
     container: 'container2',
@@ -186,8 +161,14 @@ let stage2 = new Konva.Stage({
 });
 
 let layer3 = new Konva.Layer();
+
 let layer4 = new Konva.Layer();
+
+// stage2.container().style.backgroundImage = '..//static//assets//OIP.jpg';
+//let imageObj = new Image();
+
 let imageObj2 = new Image();
+
   imageObj2.onload = function () {
       let yoda = new Konva.Image({
           x: 0,
@@ -200,8 +181,8 @@ let imageObj2 = new Image();
       // add the shape to the layer
       layer3.add(yoda);
   };
-  console.log(path2);
-  imageObj2.src = path2;
+console.log(path2);
+imageObj2.src = path2;
 
 let rect1 = new Konva.Rect({
     x: 0,
@@ -214,13 +195,16 @@ let rect1 = new Konva.Rect({
     opacity: 0.1,
 });
 
+
 layer4.add(rect1);
+
 
 stage2.add(layer3);
 stage2.add(layer4);
 
 let tr1 = new Konva.Transformer();
 layer4.add(tr1);
+
 
 // by default select all shapes
 tr1.nodes([ rect1]);
@@ -325,6 +309,52 @@ stage2.on('click tap', function (e) {
     const nodes = tr1.nodes().concat([e.target]);
     tr1.nodes(nodes);
   }
+
 });
+ 
+  function submit() {
+    let form = document.getElementById("form");
+    form.submit();
+    alert("Data stored in database!");
+}
 
+let zorar = document.getElementById('zorar');
+zorar.onclick = __=>{
+  console.log(`
+   Width: ${rect1.width()}
+   Height: ${rect1.height()}
+   ScaleX: ${rect1.scaleX()}
+   ScaleY: ${rect1.scaleY()}
 
+   New Width: ${rect1.width() * rect1.scaleX()}
+   New Height: ${rect1.height() * rect1.scaleY()}
+
+  Width0: ${rect.width()}
+  Height0: ${rect.height()}
+  ScaleX0: ${rect.scaleX()}
+  ScaleY0: ${rect.scaleY()}
+
+  New Width0: ${rect.width() * rect.scaleX()}
+  New Height0: ${rect.height() * rect.scaleY()}
+  `)
+  
+  $.ajax({
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/getC',
+    dataType: 'json',
+    async: false,
+    data: {
+        x1: rect.attrs.x,
+        y1: rect.attrs.y,
+        w1: rect.width() * rect.scaleX(),
+        h1: rect.height() * rect.scaleY(),
+        x2: rect1.attrs.x,
+        y2: rect1.attrs.y,
+        w2: rect1.width() * rect1.scaleX(),
+        h2: rect1.height() * rect1.scaleY(),
+    },
+    success: function (res, status, xhr) {
+        console.log(res);
+    }
+});
+}

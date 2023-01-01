@@ -1,18 +1,8 @@
-.column h2{
-    margin-bottom: 3px;
-    align-items: center;
-    text-align: center;
-    font-size: 30px;
-    margin-top: 0px;
-
-}
 .container{
     width: 100%;
     display: flex;
     flex-direction: row;
     column-gap: 49px;
-    margin-top: 40px;
-
 }
 .column{
     width: 400px;
@@ -21,44 +11,45 @@
     border: 4px;
     border-top-style: double;
     border-left-style: double;
-    margin: 1rem;
-    padding: 20px;
+    margin-left: 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 50%);
     border-left-color: #2b5876;
     border-top-color: #2b5876;
+    padding-top: 5px;
+    padding-bottom: 9px;
+    padding-right: 40px;
+    padding-left: 20px;
 
 }
-#fileUpload, #fileUpload1{
-    display: block;
-    width: 116px;
+.column h2{
+    margin-bottom: -3px;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-left: 118px;
 
 }
 .options{
+    height: 23px;
+    margin-left: -18px;
+    margin-top: 59px;
+}
+#fileUpload, #fileUpload1{
+    display: block;
+    width: 111px;
+}
+.options1{
+    margin-top: 329px;
     display: flex;
-    flex-direction: row;
-    column-gap: 20px;
-    height: 30px;
-    width: 12px;
-    margin-left: 210px;
+    flex-direction: column;
+    row-gap: 19px;
+    height: 23px;
+    width: 112px;
+    margin-left: -18px;
     justify-content: center;
 }
-.image_container {
-    text-align: center;
-    margin: 20px;
-    margin-top: 53px;
-
-}
-.image_container p{
-    margin-top: 3px;
-    margin-bottom: 3px;
-    
-}
-
-#container1, #container2{
-    align-self: center;
-}
-
 input[type="file"]::file-selector-button, .btn {
     background-image: linear-gradient(
         to right,
@@ -72,36 +63,57 @@ input[type="file"]::file-selector-button, .btn {
     font-weight: 600;
     color: #fff;
     cursor: pointer;
-    margin: 8px;
-    height: 41px;
+    margin: 3px;
+    height: 35px;
     text-align:center;
     border: none;
     background-size: 300% 100%;
     border-radius: 50px;
-
 }
-
 input[type="file"]::file-selector-button:hover ,.btn:hover{
     color: #fff;
     background-position: 100% 0;
 }
-
-.btn1{
-    background-color: beige;
-    width: 105px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    margin: 8px;
-    height: 41px;
-    text-align:center;
-    border: none;
-    background-size: 300% 100%;
-    border-radius: 50px;
-
+.image_container {
+    text-align: end;
+    margin-top: -429px;
 }
-
-.title{
-    
+.image_container p{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+#container1, #container2{
+    align-self: center;
+    margin-top: 4px;
+    margin-left: 100px;
+}
+.btn1{
+    align-self: center;
+}
+.result{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 4px;
+    border-top-style: double;
+    border-left-style: double;
+    margin: 1rem;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 50%);
+    border-left-color: #2b5876;
+    border-top-color: #2b5876;
+    height: 403px;
+    margin-top: 122px;
+}
+.result_container {
+    text-align: center;
+    margin-top: 9px;
+}
+.result h2{
+    margin-bottom: -3px;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0px;
 }

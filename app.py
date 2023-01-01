@@ -32,17 +32,36 @@ def uploadPhoto():
         sender = int(request.form['sender'])
         name = request.form['img'+f'{sender}']
         picPath = os.path.join(app.config['UPLOAD_FOLDER'],name)          
+        print('-'*54)
+        print(picPath)
         images[sender] = Image(picPath)
         Image.takenMag = sender
+        print(images[1].spatialDomainPath)
         return render_template('main.html',images = images)
 
 @app.route('/getC',methods=['POST'])
 def getC():
-    
-    x = int(request.values['x'])
-    print('-'*54)
-    print(x)
-    return "0"
+    x1 = int(float(request.values['x1']))
+    y1 = int(float(request.values['y1']))
+    w1 = int(float(request.values['w1']))
+    h1 = int(float(request.values['h1']))
+    x2 = int(float(request.values['x2']))
+    y2 = int(float(request.values['y2']))
+    w2 = int(float(request.values['w2']))
+    h2 = int(float(request.values['h2']))
+    print(request.values)
+    print('-'*150)
+    magIdx = Image.takenMag
+    if magIdx == 1:
+        phaseIdx = 2
+    else:
+        phaseIdx = 1
+    newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,0,1)
+    newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,0,0)
+    newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
+    images[3] = Image(newImgPath)
+    print(newImgPath)
+    return render_template('main.html',images = images)
 if __name__ == "__main__":
     app.run(debug=True)
 
