@@ -4,6 +4,7 @@ from functions import Image
 import numpy as np
 import cv2
 import os
+import json
 
 
 app = Flask(__name__)
@@ -68,6 +69,8 @@ def getC():
     newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
     images[3] = Image(newImgPath)
     print(newImgPath)
+    return json.dumps({0: f' <img src="{newImgPath}">'
+     })
     # return '0'
     # return redirect(url_for('home', images=images))
     return render_template('main.html',images = images)
