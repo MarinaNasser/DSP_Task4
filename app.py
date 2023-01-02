@@ -11,7 +11,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 picFolder = os.path.join('static','assets')
 app.config['UPLOAD_FOLDER'] = picFolder
 
-images = [0,0,0,0]
+images = [0,Image('static/assets/img8.jpg'),Image('static/assets/img8.jpg'),Image('static/assets/result8109.jpg')]
 
 @app.route('/')
 def home():
@@ -68,7 +68,8 @@ def getC():
     newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
     images[3] = Image(newImgPath)
     print(newImgPath)
-    return redirect(url_for('home', images=images))
+    # return '0'
+    # return redirect(url_for('home', images=images))
     return render_template('main.html',images = images)
 if __name__ == "__main__":
     app.run(debug=True)

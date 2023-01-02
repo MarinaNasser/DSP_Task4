@@ -327,6 +327,8 @@ stage2.on('click tap', function (e) {
 }
 
   function getNewImage(){
+  // document.getElementById('frameId').contentWindow.location.reload();
+
   console.log(`
    Width: ${rect1.width()}
    Height: ${rect1.height()}
@@ -349,7 +351,7 @@ stage2.on('click tap', function (e) {
     method: 'POST',
     url: 'http://127.0.0.1:5000/getC',
     dataType: 'json',
-    async: false,
+    async: true,
     data: {
         x1: rect.attrs.x,
         y1: rect.attrs.y,
@@ -365,43 +367,9 @@ stage2.on('click tap', function (e) {
     }
 });
 }
-// let zorar = document.getElementById('zorar');
-// zorar.onclick = __=>{
-//   console.log(`
-//    Width: ${rect1.width()}
-//    Height: ${rect1.height()}
-//    ScaleX: ${rect1.scaleX()}
-//    ScaleY: ${rect1.scaleY()}
 
-//    New Width: ${rect1.width() * rect1.scaleX()}
-//    New Height: ${rect1.height() * rect1.scaleY()}
-
-//   Width0: ${rect.width()}
-//   Height0: ${rect.height()}
-//   ScaleX0: ${rect.scaleX()}
-//   ScaleY0: ${rect.scaleY()}
-
-//   New Width0: ${rect.width() * rect.scaleX()}
-//   New Height0: ${rect.height() * rect.scaleY()}
-//   `)
-  
-//   $.ajax({
-//     method: 'POST',
-//     url: 'http://127.0.0.1:5000/getC',
-//     dataType: 'json',
-//     async: false,
-//     data: {
-//         x1: rect.attrs.x,
-//         y1: rect.attrs.y,
-//         w1: rect.width() * rect.scaleX(),
-//         h1: rect.height() * rect.scaleY(),
-//         x2: rect1.attrs.x,
-//         y2: rect1.attrs.y,
-//         w2: rect1.width() * rect1.scaleX(),
-//         h2: rect1.height() * rect1.scaleY(),
-//     },
-//     success: function (res, status, xhr) {
-//         console.log(res);
-//     }
-// });
-// }
+let zorar = document.getElementById('zorar');
+zorar.onclick = __=>{
+  // getNewImage()
+  self.location.reload();
+}

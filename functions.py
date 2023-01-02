@@ -10,8 +10,10 @@ class Image:
     def __init__(self,spatialDomainPath,takenInOrOut = 1):
         self.spatialDomainPath = spatialDomainPath
         self.takenInOrOut = takenInOrOut
+    
     def toggleInOrOut(self):
         self.takenInOrOut = not self.takenInOrOut
+    
     def getSpatialDomainData(self):
         return cv2.imread(self.spatialDomainPath,0)
     def getfft(self):

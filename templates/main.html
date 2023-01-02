@@ -52,7 +52,7 @@
       {%endif%}
     {%endif%}
     
-    <div id="container1" onclick='getNewImage()'></div>
+    <div id="container1" onclick='getNewImage()' ></div>
   </div>
 
        
@@ -94,15 +94,15 @@
         <h2>Phase</h2>
       {%endif%}
     {%endif%}
-    <div id="container2"></div>
+    <div id="container2" onclick='getNewImage()'></div>
   </div>
 
   <div class="result">
     <h2>Result</h2>
-    <button  class="btn " name="rect" id='zorar' >zorar</button>
+    <button  class="btn " name="rect" id='zorar' >Show</button>
     <div class="result_container" >
       {%if images[3]%}
-        <img src="{{images[3].spatialDomainPath}}" alt="image 3">   
+        <img src="{{images[3].spatialDomainPath}}" alt="image 3">
       {%endif%}
     </div>
   </div>
