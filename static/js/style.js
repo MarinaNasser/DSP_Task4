@@ -29,10 +29,10 @@ console.log(path);
 imageObj.src = path;
   
 let rect = new Konva.Rect({
-    x: 0,
-    y: 0,
-    width: 150,
-    height: 90,
+    x: coordinates[0],
+    y: coordinates[1],
+    width: coordinates[2],
+    height: coordinates[3],
     fill: 'blue',
     name: 'rect',
     draggable: true,
@@ -190,10 +190,10 @@ console.log(path2);
 imageObj2.src = path2;
 
 let rect1 = new Konva.Rect({
-    x: 0,
-    y: 0,
-    width: 150,
-    height: 90,
+    x: coordinates[4],
+    y: coordinates[5],
+    width: coordinates[6],
+    height: coordinates[7],
     fill: 'blue',
     name: 'rect1',
     draggable: true,
@@ -330,6 +330,7 @@ stage2.on('click tap', function (e) {
   // document.getElementById('frameId').contentWindow.location.reload();
 
   console.log(`
+  ${coordinates}
    Width: ${rect1.width()}
    Height: ${rect1.height()}
    ScaleX: ${rect1.scaleX()}

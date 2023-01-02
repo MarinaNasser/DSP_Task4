@@ -97,7 +97,6 @@ class Image:
         resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
         name = f'result{random.randint(1,10000)}.jpg'
         path = f'static/assets/{name}'
-        
         cv2.imwrite(path,resulting_img)
         return path
     @staticmethod

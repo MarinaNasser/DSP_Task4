@@ -9,13 +9,14 @@ import os
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 picFolder = os.path.join('static','assets')
+coordinates = [0,0,150,90,0,0,150,90]
 app.config['UPLOAD_FOLDER'] = picFolder
 
 images = [0,Image('static/assets/img8.jpg'),Image('static/assets/img8.jpg'),Image('static/assets/result8109.jpg')]
 
 @app.route('/')
 def home():
-    return render_template('main.html',images = images)
+    return render_template('main.html',images = images,coordinates = coordinates)
 
 @app.route('/switch',methods=['POST'])
 def switch():
@@ -43,7 +44,7 @@ def uploadPhoto():
         images[sender] = Image(picPath)
         Image.takenMag = sender
         # print(images[1].spatialDomainPath)
-        return render_template('main.html',images = images)
+        return render_template('main.html',images = images,coordinates = coordinates)
 
 @app.route('/getC',methods=['POST'])
 def getC():
@@ -56,6 +57,8 @@ def getC():
     y2 = int(float(request.values['y2']))
     w2 = int(float(request.values['w2']))
     h2 = int(float(request.values['h2']))
+    coordinates = [x1,y1,w1,h1,x2,y2,w2,h2]
+    
     print(request.values)
     print('-'*150)
     magIdx = Image.takenMag
@@ -65,12 +68,12 @@ def getC():
         phaseIdx = 1
     newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,not images[1].takenInOrOut,1)
     newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,not images[1].takenInOrOut,0)
-    newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
-    images[3] = Image(newImgPath)
-    print(newImgPath)
+    resultingImage = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
+    images[3] = Image(resultingImage)
+    # print(newImgPath)
     # return '0'
     # return redirect(url_for('home', images=images))
-    return render_template('main.html',images = images)
+    return render_template('main.html',images = images,coordinatets = coordinates)
 if __name__ == "__main__":
     app.run(debug=True)
 
