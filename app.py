@@ -43,6 +43,8 @@ def uploadPhoto():
         print(picPath)
         images[sender] = Image(picPath)
         Image.takenMag = sender
+        magPath = images[sender].getPathOfMagOrPhasePlot(1)
+        return json.dumps({0: f' <img src="{magPath}">'})
         # print(images[1].spatialDomainPath)
         return render_template('main.html',images = images)
 
