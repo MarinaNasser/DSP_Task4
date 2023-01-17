@@ -404,3 +404,71 @@ save.addEventListener("click", function () {
   });
 
 })
+
+var mycheckbox1 = document.getElementById("mycheckbox1")
+mycheckbox1.addEventListener("change", function () {
+  const checked = document.getElementById("mycheckbox1").checked
+  $.ajax({
+    
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/getC',
+    dataType: 'json',
+    async: true,
+    data: {
+        checked1:checked,
+        x1: rect.attrs.x,
+        y1: rect.attrs.y,
+        w1: rect.width() * rect.scaleX(),
+        h1: rect.height() * rect.scaleY(),
+        x2: rect1.attrs.x,
+        y2: rect1.attrs.y,
+        w2: rect1.width() * rect1.scaleX(),
+        h2: rect1.height() * rect1.scaleY(),
+    },
+    success: function (res) {
+        console.log(res[0]);
+        var result_container = document.getElementById("result_container")
+        result_container.innerHTML=""
+        var image = document.createElement("div")
+        image.className = "result_container"
+        image.innerHTML = res[0]
+        result_container.appendChild(image)
+    }
+  });
+
+})
+
+var mycheckbox2 = document.getElementById("mycheckbox2")
+mycheckbox2.addEventListener("change", function () {
+  console.log('checkbox');
+  const checked = document.getElementById("mycheckbox2").checked
+  $.ajax({
+
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/getC',
+    dataType: 'json',
+    async: true,
+    data: {
+        checked2:checked,
+        x1: rect.attrs.x,
+        y1: rect.attrs.y,
+        w1: rect.width() * rect.scaleX(),
+        h1: rect.height() * rect.scaleY(),
+        x2: rect1.attrs.x,
+        y2: rect1.attrs.y,
+        w2: rect1.width() * rect1.scaleX(),
+        h2: rect1.height() * rect1.scaleY(),
+    },
+    success: function (res) {
+        console.log(res[0]);
+        var result_container = document.getElementById("result_container")
+        result_container.innerHTML=""
+        var image = document.createElement("div")
+        image.className = "result_container"
+        image.innerHTML = res[0]
+        result_container.appendChild(image)
+    }
+  });
+
+})
+

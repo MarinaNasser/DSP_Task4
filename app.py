@@ -20,9 +20,26 @@ def home():
 
 @app.route('/switch',methods=['POST'])
 def switch():
-    if request.method == 'POST' and 'inOrOutSender' in request.form:
-        inOrOutSender = int(request.form['inOrOutSender'])
-        images[inOrOutSender].toggleInOrOut()
+    if request.method == 'POST' and 'checked' in request.values:
+        checked = (request.values['checked']) == 'true'
+        if checked:
+            images[1].toggleInOrOut()
+        # inOrOutSender = int(request.form['inOrOutSender'])
+        # images[inOrOutSender].toggleInOrOut()
+        print(request.values)
+        print('-'*150)
+        magIdx = Image.takenMag
+        if magIdx == 1:
+            phaseIdx = 2
+        else:
+            phaseIdx = 1
+        newFourierToMag = images[magIdx].getMasked(x1,y1,w1,h1,not images[1].takenInOrOut,1)
+        newFourierToPhase = images[phaseIdx].getMasked(x2,y2,w2,h2,not images[1].takenInOrOut,0)
+        newImgPath = Image.mixMagAndPhase(newFourierToMag,newFourierToPhase)
+        images[3] = Image(newImgPath)
+        print(newImgPath)
+        return json.dumps({0: f' <img src="{newImgPath}">'
+        })
         return render_template('main.html',images = images)
     
     if request.method == 'POST' and 'sender' in request.form:
@@ -33,7 +50,7 @@ def switch():
             Image.takenMag = 2
         return render_template('main.html',images = images)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/upload',methods=['GET','POST'])
 def uploadPhoto():
     if request.method == 'POST':
         sender = int(request.form['sender'])
@@ -44,13 +61,19 @@ def uploadPhoto():
         images[sender] = Image(picPath)
         Image.takenMag = sender
         magPath = images[sender].getPathOfMagOrPhasePlot(1)
-        return json.dumps({0: f' <img src="{magPath}">'})
+        # return json.dumps({0: f' <img src="{magPath}">'})
         # print(images[1].spatialDomainPath)
         return render_template('main.html',images = images)
 
 @app.route('/getC',methods=['POST'])
 def getC():
-    
+    if request.method == 'POST':
+        if 'checked1' in request.values:
+            checked = request.values['checked1'] == 'true'
+            images[1].takenInOrOut = not checked
+        elif 'checked2' in request.values:
+            checked = request.values['checked2'] == 'true'
+            images[2].takenInOrOut = not checked
     x1 = int(float(request.values['x1']))
     y1 = int(float(request.values['y1']))
     w1 = int(float(request.values['w1']))
@@ -62,6 +85,7 @@ def getC():
     print(request.values)
     print('-'*150)
     magIdx = Image.takenMag
+    print(magIdx)
     if magIdx == 1:
         phaseIdx = 2
     else:

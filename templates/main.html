@@ -34,11 +34,10 @@
         <input style="visibility: hidden; height:0px; " name='inOrOutSender' value='1'> 
         <!-- <input type="checkbox" id="outside1" >
         <label for="outside1">Outside box</label><br> -->
-        {%if images[1].takenInOrOut%}
-          <button class="btn" name="mag2Btn" type="submit">Outside box</button>
-        {%else%}
-          <button class="btn" name="mag2Btn" type="submit">Inside box</button>
-        {%endif%}
+        
+        <input id="mycheckbox1" type="checkbox" />
+        <label for="mycheckbox1">Outside box</label>
+        
       </form>
     </div>
     <div class="image_container" >
@@ -80,11 +79,9 @@
         <!-- <input type="checkbox" id="outside2" >
         <input type=checkbox name='inOrOutSender' value='1'> Outside <br/> -->
 
-        {%if images[2].takenInOrOut%}
-          <button class="btn" name="mag2Btn" type="submit">Outside box</button>
-        {%else%}
-          <button class="btn" name="mag2Btn" type="submit">Inside box</button>
-        {%endif%}
+        <input id="mycheckbox2" type="checkbox" />
+        <label for="mycheckbox2">Outside box</label>
+        
       </form>
     </div>
     <div class="image_container">

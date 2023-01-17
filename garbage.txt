@@ -29,3 +29,9 @@ def phase2():
     img_fft2,img_magnitude2,img_phase2= functions.fourier_transform_shift(img2)
     path =  functions.plot_phase(img_phase2)
     return render_template('main.html');
+
+{% comment %} {%if images[1].takenInOrOut%}
+          <button class="btn" name="mag2Btn" type="submit">Outside box</button>
+        {%else%}
+          <button class="btn" name="mag2Btn" type="submit">Inside box</button>
+        {%endif%} {% endcomment %}
