@@ -32,13 +32,13 @@
       </form>
       <form action="{{url_for('switch')}}" method="POST" style="height:26px">
         <input style="visibility: hidden; height:0px; " name='inOrOutSender' value='1'> 
-        <input type="checkbox" id="outside1" >
-        <label for="outside1">Outside box</label><br>
-        <!-- {%if images[1].takenInOrOut%}
+        <!-- <input type="checkbox" id="outside1" >
+        <label for="outside1">Outside box</label><br> -->
+        {%if images[1].takenInOrOut%}
           <button class="btn" name="mag2Btn" type="submit">Outside box</button>
         {%else%}
           <button class="btn" name="mag2Btn" type="submit">Inside box</button>
-        {%endif%} -->
+        {%endif%}
       </form>
     </div>
     <div class="image_container" >
@@ -77,13 +77,14 @@
       </form>
       <form action="{{url_for('switch')}}" method="POST" style="height:26px">
         <input style="visibility: hidden; height:0px; " name='inOrOutSender' value='2'> 
-        <input type="checkbox" id="outside2" >
-        <label for="outside2">Outside box</label><br>
-        <!-- {%if images[2].takenInOrOut%}
+        <!-- <input type="checkbox" id="outside2" >
+        <input type=checkbox name='inOrOutSender' value='1'> Outside <br/> -->
+
+        {%if images[2].takenInOrOut%}
           <button class="btn" name="mag2Btn" type="submit">Outside box</button>
         {%else%}
           <button class="btn" name="mag2Btn" type="submit">Inside box</button>
-        {%endif%} -->
+        {%endif%}
       </form>
     </div>
     <div class="image_container">
