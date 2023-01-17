@@ -33,7 +33,7 @@ def switch():
             Image.takenMag = 2
         return render_template('main.html',images = images)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/upload',methods=['GET','POST'])
 def uploadPhoto():
     if request.method == 'POST':
         sender = int(request.form['sender'])
@@ -43,8 +43,19 @@ def uploadPhoto():
         print(picPath)
         images[sender] = Image(picPath)
         Image.takenMag = sender
+        # magPath = images[sender].getPathOfMagOrPhasePlot(1)
+        # return json.dumps({0: f' {magPath}'  })
         # print(images[1].spatialDomainPath)
         return render_template('main.html',images = images)
+
+@app.route('/getMag',methods=['GET','POST'])
+def getMag():
+    if request.method == 'POST': 
+        sender = int(float(request.values['sender']))      
+        print('-'*54)
+        Image.takenMag = sender
+        magPath = images[sender].getPathOfMagOrPhasePlot(sender)
+        return json.dumps({0: f' ../static/assets/{magPath}'  })
 
 @app.route('/getC',methods=['POST'])
 def getC():
