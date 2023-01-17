@@ -1,3 +1,38 @@
+let Mag1 = document.getElementById("mag1Btn")
+let Mag2 = document.getElementById("mag2Btn")
+let sender =1
+Mag1.onclick= () =>{
+ sender=1
+ $.ajax({
+  method: 'POST',
+  url: 'http://127.0.0.1:5000/getMag',
+  dataType: 'json',
+  async: true,
+  data:{sender: sender},
+
+  success: function (res) {
+      console.log(res[0]);
+      imageObj.src = res[0];
+  }
+});
+}
+Mag2.onclick= () =>{
+  sender=2
+  $.ajax({
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/getMag',
+    dataType: 'json',
+    async: true,
+    data:{sender: sender},
+  
+    success: function (res) {
+        console.log(res[0]);
+        imageObj2.src = res[0];
+    }
+  });
+}
+
+
 let width = 300;
 let height = 300;
 
@@ -13,6 +48,9 @@ let layer2 = new Konva.Layer();
 
 let imageObj = new Image();
 
+ 
+
+
   imageObj.onload = function () {
       let yoda = new Konva.Image({
           x: 0,
@@ -25,6 +63,7 @@ let imageObj = new Image();
       // add the shape to the layer
       layer1.add(yoda);
   };
+
 console.log(path);
 imageObj.src = path;
   
