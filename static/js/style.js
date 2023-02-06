@@ -1,33 +1,97 @@
 let Mag1 = document.getElementById("mag1Btn")
 let Mag2 = document.getElementById("mag2Btn")
+let phase1 = document.getElementById("phase1Btn")
+let phase2 = document.getElementById("phase2Btn")
 let sender =1
 Mag1.onclick= () =>{
- sender=1
+ sender=11
  $.ajax({
   method: 'POST',
-  url: 'http://127.0.0.1:5000/getMag',
+  url: 'http://127.0.0.1:5000/switch',
   dataType: 'json',
   async: true,
   data:{sender: sender},
 
   success: function (res) {
-      console.log(res[0]);
+    console.log(res[0]);
+    console.log(res[1]);
       imageObj.src = res[0];
+      imageObj2.src = res[1];
+      var title1 = document.getElementById("title")
+      var title2 = document.getElementById("title2")
+      title1.innerHTML=""
+      title2.innerHTML=""
+      title1.innerHTML = res[2]
+      title2.innerHTML = res[3]
   }
 });
 }
 Mag2.onclick= () =>{
-  sender=2
+  sender=12
   $.ajax({
     method: 'POST',
-    url: 'http://127.0.0.1:5000/getMag',
+    url: 'http://127.0.0.1:5000/switch',
+    dataType: 'json',
+    async: true,
+    data:{sender: sender},
+  
+    success: function (res) {
+      console.log(res[0]);
+      console.log(res[1]);
+        imageObj.src = res[1];
+        imageObj2.src = res[0];
+        var title1 = document.getElementById("title")
+        var title2 = document.getElementById("title2")
+        title1.innerHTML=""
+        title2.innerHTML=""
+        title1.innerHTML = res[3]
+        title2.innerHTML = res[2]
+    }
+  });
+}
+phase1.onclick= () =>{
+  sender=21
+  $.ajax({
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/switch',
     dataType: 'json',
     async: true,
     data:{sender: sender},
   
     success: function (res) {
         console.log(res[0]);
+        console.log(res[1])
+        imageObj.src = res[1];
         imageObj2.src = res[0];
+        var title1 = document.getElementById("title")
+        var title2 = document.getElementById("title2")
+        title1.innerHTML=""
+        title2.innerHTML=""
+        title1.innerHTML = res[3]
+        title2.innerHTML = res[2]
+    }
+  });
+}
+phase2.onclick= () =>{
+  sender=22
+  $.ajax({
+    method: 'POST',
+    url: 'http://127.0.0.1:5000/switch',
+    dataType: 'json',
+    async: true,
+    data:{sender: sender},
+  
+    success: function (res) {
+      console.log(res[0]);
+      console.log(res[1]);
+        imageObj.src = res[0];
+        imageObj2.src = res[1];
+        var title1 = document.getElementById("title")
+        var title2 = document.getElementById("title2")
+        title1.innerHTML=""
+        title2.innerHTML=""
+        title1.innerHTML = res[2]
+        title2.innerHTML = res[3]
     }
   });
 }

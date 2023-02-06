@@ -43,8 +43,6 @@
 }
 .options1{
     margin-top: 329px;
-    display: flex;
-    flex-direction: column;
     row-gap: 19px;
     height: 23px;
     width: 112px;
