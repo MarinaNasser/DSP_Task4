@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect,jsonify,session,url_for
 import functions
 from functions import Image
-import numpy as np
-import cv2
 import os
 import json
 
