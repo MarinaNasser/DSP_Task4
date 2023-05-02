@@ -28,11 +28,10 @@ This web application enables users to merge two images by extracting either the 
 - Real-time display of the output image while the user selects the merged part
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/<username>/<repository-name>.git`
-2. Navigate to the project directory: `cd <repository-name>`
-3. Create a virtual environment: `python -m venv env`
-4. Activate the virtual environment: `source env/bin/activate`
-5. Install the requirements: `pip install -r requirements.txt`
+1. Clone the repository: `git clone https://github.com/MarinaNasser/DSP_Task4`
+2. Create a virtual environment: `python -m venv env`
+3. Activate the virtual environment: `source env/bin/activate`
+4. Install the requirements: `pip install -r requirements.txt`
 
 ## Usage
 1. Start the application: `python app.py`
